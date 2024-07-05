@@ -23,3 +23,7 @@ export async function createProduct({
     },
   });
 }
+
+export async function getProducts() {
+  return await prisma.product.findMany();
+}

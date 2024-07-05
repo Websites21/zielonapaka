@@ -15,7 +15,7 @@ export default function AddProductForm() {
   const ref = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
-    if ((state.message = 'Produkt dodano pomyślnie.')) {
+    if (state.message === 'Produkt dodano pomyślnie.') {
       ref.current?.reset();
     }
   }, [state]);
@@ -75,9 +75,8 @@ export default function AddProductForm() {
         >
           Opis
         </label>
-        <input
+        <textarea
           className='text-base border border-gray-200 py-2 px-4 rounded-lg text-gray-950 placeholder:text-gray-500 shadow-lg shadow-gray-200/50'
-          type='text'
           name='description'
           id='description'
           placeholder='Opis'
