@@ -15,6 +15,10 @@ export default function ProductInfo({ product }: { product: TProduct }) {
     setQuantity((prev) => prev - 1);
   }
 
+  async function handleCreateOrUpdateCartItem() {
+    await createOrUpdateCartItemAction(product.id, quantity);
+  }
+
   return (
     <section className='max-w-screen-2xl mx-auto px-4 sm:px-8 my-16 lg:my-32'>
       <div className='grid lg:grid-cols-2 gap-16'>
@@ -73,6 +77,7 @@ export default function ProductInfo({ product }: { product: TProduct }) {
           <button
             className='w-full text-center bg-green-700 shadow-lg shadow-green-700/50 text-white font-medium text-lg py-3 rounded-lg hover:bg-green-800 transition-all duration-300'
             type='button'
+            onClick={handleCreateOrUpdateCartItem}
           >
             Dodaj do koszyka
           </button>

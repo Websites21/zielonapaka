@@ -1,8 +1,17 @@
 'use server';
 
-import { createSession, createUser, getUserByEmail } from '@/lib/server-utils';
+import {
+  createCart,
+  createOrUpdateCartItem,
+  createSession,
+  createUser,
+  getCartByUserID,
+  getUserByEmail,
+  verifySession,
+} from '@/lib/server-utils';
 import { LoginSchema, SignupSchema } from '@/lib/validations';
 import bcrypt from 'bcryptjs';
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -30,6 +39,7 @@ export async function signupAction(_: any, formData: unknown) {
 
       const newUser = await createUser({ username, email, passwordHash });
       await createSession(newUser.id);
+      await createCart(newUser.id);
     } catch (error) {
       console.log(error);
       const message = 'Coś poszło nie tak. Spróbuj ponownie.';
@@ -90,4 +100,21 @@ export async function loginAction(_: any, formData: unknown) {
 export async function logoutAction() {
   cookies().delete('session_token');
   redirect('/login');
+}
+
+export async function createOrUpdateCartItemAction(
+  productID: string,
+  quantity: number
+) {
+  const session = await verifySession();
+
+  if (!session) redirect('/login');
+
+  const cart = await getCartByUserID(session.userID);
+
+  if (!cart) return null;
+
+  await createOrUpdateCartItem(cart.id, productID, quantity);
+
+  revalidatePath('/');
 }

@@ -122,3 +122,27 @@ export async function getUser() {
     where: { id: session.userID },
   });
 }
+
+export async function createCart(userID: string) {
+  await prisma.cart.create({
+    data: { userID },
+  });
+}
+
+export async function getCartByUserID(userID: string) {
+  return await prisma.cart.findUnique({
+    where: { userID },
+  });
+}
+
+export async function createOrUpdateCartItem(
+  cartID: string,
+  productID: string,
+  quantity: number
+) {
+  await prisma.cartItem.upsert({
+    where: { cartID_productID: { cartID, productID } },
+    create: { cartID, productID, quantity },
+    update: { quantity },
+  });
+}
