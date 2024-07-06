@@ -85,3 +85,40 @@ export async function createSession(userID: string) {
     sameSite: 'lax',
   });
 }
+
+export async function verifySession() {
+  const token = cookies().get('session_token')?.value;
+
+  if (!token) return null;
+
+  try {
+    const session = await getSessionByID(token);
+
+    if (!session) return null;
+
+    const isSessionActive = session.expiresAt > new Date();
+
+    if (!isSessionActive) return null;
+
+    return session;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getSessionByID(sessionID: string) {
+  return await prisma.session.findUnique({
+    where: { id: sessionID },
+  });
+}
+
+export async function getUser() {
+  const session = await verifySession();
+
+  if (!session) return null;
+
+  return await prisma.user.findUnique({
+    where: { id: session.userID },
+  });
+}
