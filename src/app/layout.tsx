@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='pl'>
+    <html className='scroll-smooth' lang='pl'>
       <body className={poppins.className}>
         <Nav />
         {children}

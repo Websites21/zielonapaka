@@ -32,7 +32,10 @@ export default function ProductsSection({
   const sortedProducts = sortProducts(products, sortBy);
 
   return (
-    <section className='max-w-screen-2xl mx-auto px-4 sm:px-8 mb-16 lg:mb-32'>
+    <section
+      className='max-w-screen-2xl mx-auto px-4 sm:px-8 mb-16 lg:mb-32'
+      id='products'
+    >
       <h2 className='text-4xl font-medium tracking-tight text-gray-950 mb-8'>
         Świeżo, tanio i ekologicznie 😊
       </h2>
