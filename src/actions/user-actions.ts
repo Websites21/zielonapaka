@@ -5,6 +5,7 @@ import {
   createOrUpdateCartItem,
   createSession,
   createUser,
+  deleteCartItemByID,
   getCartByUserID,
   getUserByEmail,
   verifySession,
@@ -116,5 +117,10 @@ export async function createOrUpdateCartItemAction(
 
   await createOrUpdateCartItem(cart.id, productID, quantity);
 
+  revalidatePath('/');
+}
+
+export async function deleteCartItemAction(cartItemID: string) {
+  await deleteCartItemByID(cartItemID);
   revalidatePath('/');
 }

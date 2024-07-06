@@ -156,3 +156,16 @@ export async function getCartItems() {
     where: { cart: { userID: user.id } },
   });
 }
+
+export async function getCartItemsWithProductDetailsByCartID(cartID: string) {
+  return await prisma.cartItem.findMany({
+    where: { cartID },
+    include: { product: true },
+  });
+}
+
+export async function deleteCartItemByID(cartItemID: string) {
+  await prisma.cartItem.delete({
+    where: { id: cartItemID },
+  });
+}

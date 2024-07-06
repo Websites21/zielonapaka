@@ -12,3 +12,14 @@ export type TUser = {
   email: string;
   passwordHash: string;
 };
+
+export type TCartItem = {
+  id: string;
+  cartID: string;
+  productID: string;
+  quantity: number;
+};
+
+export type TCartItemWithProductDetails = TCartItem & {
+  product: TProduct;
+};
