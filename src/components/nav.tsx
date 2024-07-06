@@ -1,6 +1,9 @@
+import { getCartItems } from '@/lib/server-utils';
 import Link from 'next/link';
 
-export default function Nav() {
+export default async function Nav() {
+  const cartItemsLength = (await getCartItems())?.length;
+
   return (
     <nav className='sticky top-0 z-50 bg-white border-b border-b-gray-200'>
       <div className='max-w-screen-2xl mx-auto px-4 sm:px-8 h-24 flex justify-between items-center'>
@@ -26,6 +29,11 @@ export default function Nav() {
                   strokeLinejoin='round'
                 />
               </svg>
+              {cartItemsLength && cartItemsLength > 0 ? (
+                <span className='absolute top-0 right-0 text-xs text-white flex justify-center items-center size-6 rounded-full bg-red-600 translate-x-1/4 -translate-y-1/4'>
+                  {cartItemsLength}
+                </span>
+              ) : null}
             </Link>
           </li>
           <li>

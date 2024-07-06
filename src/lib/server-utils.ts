@@ -146,3 +146,13 @@ export async function createOrUpdateCartItem(
     update: { quantity },
   });
 }
+
+export async function getCartItems() {
+  const user = await getUser();
+
+  if (!user) return null;
+
+  return await prisma.cartItem.findMany({
+    where: { cart: { userID: user.id } },
+  });
+}
