@@ -1,3 +1,4 @@
+import { logoutAction } from '@/actions/user-actions';
 import LogoutButton from '@/components/buttons/logout-button';
 import { getUser } from '@/lib/server-utils';
 import { redirect } from 'next/navigation';
@@ -15,7 +16,9 @@ export default async function Profile() {
       <p className='text-gray-700 text-lg mb-8'>
         Cieszy się, że tutaj jesteś i chcesz inwestować w swoje zdrowie!
       </p>
-      <LogoutButton />
+      <form action={logoutAction}>
+        <LogoutButton />
+      </form>
     </section>
   );
 }

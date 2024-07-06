@@ -3,6 +3,7 @@
 import { createSession, createUser, getUserByEmail } from '@/lib/server-utils';
 import { LoginSchema, SignupSchema } from '@/lib/validations';
 import bcrypt from 'bcryptjs';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 export async function signupAction(_: any, formData: unknown) {
@@ -84,4 +85,9 @@ export async function loginAction(_: any, formData: unknown) {
   }
 
   redirect('/');
+}
+
+export async function logoutAction() {
+  cookies().delete('session_token');
+  redirect('/login');
 }
