@@ -5,3 +5,10 @@ export type TProduct = {
   description: string;
   imageURL: string;
 };
+
+export type TUser = {
+  id: string;
+  username: string;
+  email: string;
+  passwordHash: string;
+};

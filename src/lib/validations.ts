@@ -6,3 +6,9 @@ export const ProductSchema = z.object({
   description: z.string().trim().min(3).max(2000),
   imageURL: z.string().url().max(2048),
 });
+
+export const SignupSchema = z.object({
+  email: z.string().toLowerCase().email().max(100),
+  password: z.string().min(3).max(100),
+  username: z.string().trim().min(3).max(20),
+});

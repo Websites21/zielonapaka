@@ -13,6 +13,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  username     String
+  email        String    @unique
+  passwordHash String
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(uuid()) @map("_id")
+  user      User     @relation(fields: [userID], references: [id], onDelete: Cascade)
+  userID    String   @db.ObjectId
+  expiresAt DateTime
+}
+
 model Product {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   name        String @unique

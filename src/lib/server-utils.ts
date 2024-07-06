@@ -1,6 +1,6 @@
 import 'server-only';
 import prisma from './prisma';
-import { type TProduct } from './types';
+import { type TUser, type TProduct } from './types';
 import { NextRequest } from 'next/server';
 
 export async function getProductByName(productName: string) {
@@ -46,5 +46,25 @@ export function checkAuthorization(req: NextRequest) {
 export async function getProductByID(productID: string) {
   return await prisma.product.findUnique({
     where: { id: productID },
+  });
+}
+
+export async function getUserByEmail(userEmail: string) {
+  return await prisma.user.findUnique({
+    where: { email: userEmail },
+  });
+}
+
+export async function createUser({
+  username,
+  email,
+  passwordHash,
+}: Omit<TUser, 'id'>) {
+  return await prisma.user.create({
+    data: {
+      username,
+      email,
+      passwordHash,
+    },
   });
 }

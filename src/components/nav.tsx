@@ -31,7 +31,7 @@ export default function Nav() {
           <li>
             <Link
               className='block group p-2 rounded-lg hover:bg-green-100 transition-all duration-300 relative'
-              href='/cart'
+              href='/login'
             >
               <svg
                 className='size-6 stroke-gray-950 group-hover:stroke-green-700 transition-all duration-300'
