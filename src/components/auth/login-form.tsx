@@ -1,12 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import SignupButton from '../buttons/signup-button';
+import LoginButton from '../buttons/login-button';
 import { useFormState } from 'react-dom';
-import { signupAction } from '@/actions/user-actions';
+import { loginAction } from '@/actions/user-actions';
 
 export default function SignupForm() {
-  const [state, action] = useFormState(signupAction, {
+  const [state, action] = useFormState(loginAction, {
     errors: {},
     message: '',
   });
@@ -21,29 +21,8 @@ export default function SignupForm() {
           <img className='size-12' src='/ikona.svg' alt='Ikona ZielonaPaka' />
         </div>
         <h1 className='text-3xl font-medium text-gray-950 mb-8 text-center'>
-          Rejestracja 🔐
+          Logowanie 🔐
         </h1>
-        <div className='flex flex-col gap-1 mb-4'>
-          <label
-            className='text-gray-950 font font-medium text-sm'
-            htmlFor='username'
-          >
-            Nazwa użytkownika
-          </label>
-          <input
-            className='text-base border border-gray-200 py-2 px-4 rounded-lg text-gray-950 placeholder:text-gray-500 shadow-lg shadow-gray-200/50'
-            type='text'
-            name='username'
-            id='username'
-            placeholder='John Galt'
-            required
-          />
-          {state.errors.username?.map((error: string) => (
-            <p className='text-red-700 text-sm mt-2' key={error}>
-              {error}
-            </p>
-          ))}
-        </div>
         <div className='flex flex-col gap-1 mb-4'>
           <label
             className='text-gray-950 font font-medium text-sm'
@@ -89,11 +68,11 @@ export default function SignupForm() {
             <p className='text-red-700 text-sm mt-2'>{state.message}</p>
           )}
         </div>
-        <SignupButton />
+        <LoginButton />
         <p className='text-sm text-center text-gray-700'>
-          Masz już konto?{' '}
-          <Link className='text-green-700 underline' href='/login'>
-            Zaloguj się
+          Nie masz jeszcze konta?{' '}
+          <Link className='text-green-700 underline' href='/signup'>
+            Zarejestruj się
           </Link>
         </p>
       </form>

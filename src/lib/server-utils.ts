@@ -2,6 +2,7 @@ import 'server-only';
 import prisma from './prisma';
 import { type TUser, type TProduct } from './types';
 import { NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
 
 export async function getProductByName(productName: string) {
   return await prisma.product.findUnique({
@@ -66,5 +67,21 @@ export async function createUser({
       email,
       passwordHash,
     },
+  });
+}
+
+export async function createSession(userID: string) {
+  const session = await prisma.session.create({
+    data: {
+      userID,
+      expiresAt: new Date(new Date().setDate(new Date().getDate() + 1)),
+    },
+  });
+
+  cookies().set('session_token', session.id, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 60 * 60 * 24,
+    sameSite: 'lax',
   });
 }

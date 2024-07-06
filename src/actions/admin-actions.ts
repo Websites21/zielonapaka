@@ -31,6 +31,7 @@ export async function addProductAction(_: any, formData: unknown) {
       const message = 'Produkt dodano pomyślnie.';
       return { errors: {}, message };
     } catch (error) {
+      console.log(error);
       const message = 'Coś poszło nie tak. Spróbuj ponownie.';
       return { errors: {}, message };
     }
