@@ -175,3 +175,16 @@ export async function deleteProductByID(productID: string) {
     where: { id: productID },
   });
 }
+
+export async function updateProduct({
+  id,
+  name,
+  price,
+  description,
+  imageURL,
+}: TProduct) {
+  await prisma.product.update({
+    where: { id },
+    data: { name, price, description, imageURL },
+  });
+}

@@ -1,8 +1,9 @@
 'use client';
 
-import { TProduct } from '@/lib/types';
+import { type TProduct } from '@/lib/types';
 import { useRef, useState } from 'react';
 import DeleteProductDialog from '../dialogs/delete-product-dialog';
+import UpdateProductDialog from '../dialogs/update-product-dialog';
 
 export default function UpdateProductsList({
   products,
@@ -12,14 +13,27 @@ export default function UpdateProductsList({
   const [deleteProductID, setDeleteProductID] = useState<string | null>(null);
   const deleteProductDialogRef = useRef<HTMLDialogElement>(null);
 
+  const [editProduct, setEditProduct] = useState<TProduct | null>(null);
+  const updateProductDialogRef = useRef<HTMLDialogElement>(null);
+
   function handleOpenDeleteProductDialog(productID: string) {
     setDeleteProductID(productID);
     deleteProductDialogRef.current?.showModal();
   }
 
   function handleCloseDeleteProductDialog() {
-    setDeleteProductID(null);
+    setEditProduct(null);
     deleteProductDialogRef.current?.close();
+  }
+
+  function handleOpenUpdateProductDialog(product: TProduct) {
+    setEditProduct(product);
+    updateProductDialogRef.current?.showModal();
+  }
+
+  function handleCloseUpdateeProductDialog() {
+    setDeleteProductID(null);
+    updateProductDialogRef.current?.close();
   }
 
   return (
@@ -55,6 +69,7 @@ export default function UpdateProductsList({
               <button
                 className='group p-2 rounded-lg hover:bg-green-100 transition-all duration-300'
                 type='button'
+                onClick={() => handleOpenUpdateProductDialog(product)}
               >
                 <svg
                   className='size-6 stroke-gray-950 group-hover:stroke-green-700 transition-all duration-300'
@@ -97,6 +112,11 @@ export default function UpdateProductsList({
         ref={deleteProductDialogRef}
         handleClose={handleCloseDeleteProductDialog}
         productID={deleteProductID}
+      />
+      <UpdateProductDialog
+        ref={updateProductDialogRef}
+        handleClose={handleCloseUpdateeProductDialog}
+        product={editProduct}
       />
     </>
   );
