@@ -23,3 +23,14 @@ export type TCartItem = {
 export type TCartItemWithProductDetails = TCartItem & {
   product: TProduct;
 };
+
+export type TCheckoutForm = {
+  clientSecret: string;
+  totalPrice: number;
+  email: string;
+};
+
+export type TPaymentInputs = {
+  totalPrice: number;
+  email: string;
+};

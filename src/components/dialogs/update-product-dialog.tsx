@@ -132,7 +132,7 @@ const UpdateProductDialog = forwardRef<HTMLDialogElement, TUpdateProductDialog>(
             </label>
             <input
               className='text-base border border-gray-200 py-2 px-4 rounded-lg text-gray-950 placeholder:text-gray-500 shadow-lg shadow-gray-200/50'
-              type='text'
+              type='url'
               name='imageURL'
               id='imageURL'
               placeholder='https://unsplash.com/...'
