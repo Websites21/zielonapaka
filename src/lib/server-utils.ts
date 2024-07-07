@@ -169,3 +169,9 @@ export async function deleteCartItemByID(cartItemID: string) {
     where: { id: cartItemID },
   });
 }
+
+export async function deleteProductByID(productID: string) {
+  await prisma.product.delete({
+    where: { id: productID },
+  });
+}

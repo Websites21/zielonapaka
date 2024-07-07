@@ -1,7 +1,11 @@
 'use server';
 
 import { ProductSchema } from '@/lib/validations';
-import { createProduct, getProductByName } from '@/lib/server-utils';
+import {
+  createProduct,
+  deleteProductByID,
+  getProductByName,
+} from '@/lib/server-utils';
 import { revalidatePath } from 'next/cache';
 
 export async function addProductAction(_: any, formData: unknown) {
@@ -39,4 +43,9 @@ export async function addProductAction(_: any, formData: unknown) {
     const message = 'Coś poszło nie tak. Spróbuj ponownie.';
     return { errors: {}, message };
   }
+}
+
+export async function deleteProductAction(productID: string) {
+  await deleteProductByID(productID);
+  revalidatePath('/');
 }
