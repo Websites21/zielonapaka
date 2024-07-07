@@ -188,3 +188,28 @@ export async function updateProduct({
     data: { name, price, description, imageURL },
   });
 }
+
+export async function createOrder(userID: string, amount: number) {
+  await prisma.order.create({
+    data: {
+      userID,
+      amount,
+    },
+  });
+}
+
+export async function deleteCartItemsByUserID(userID: string) {
+  const cart = await getCartByUserID(userID);
+
+  if (!cart) return;
+
+  await prisma.cartItem.deleteMany({
+    where: { cartID: cart.id },
+  });
+}
+
+export async function getOrdersByUserID(userID: string) {
+  return await prisma.order.findMany({
+    where: { userID },
+  });
+}
