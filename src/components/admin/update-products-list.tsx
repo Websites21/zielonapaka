@@ -63,7 +63,7 @@ export default function UpdateProductsList({
               {product.description}
             </p>
             <p className='text-base text-gray-950 line-clamp-1'>
-              {product.imageURL} zł
+              {product.imageURL}
             </p>
             <div className='space-x-1'>
               <button

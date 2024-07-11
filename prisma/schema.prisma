@@ -20,7 +20,7 @@ model User {
   passwordHash String
   sessions     Session[]
   cart         Cart?
-  order        Order[]
+  orders       Order[]
 }
 
 model Session {

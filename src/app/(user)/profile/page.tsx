@@ -16,7 +16,7 @@ export default async function Profile() {
         Witaj, <span className='text-green-700'>{user.username}</span> 👋
       </h1>
       <p className='text-gray-700 text-lg mb-8'>
-        Cieszy się, że tutaj jesteś i chcesz inwestować w swoje zdrowie!
+        Cieszymy się, że tutaj jesteś i chcesz inwestować w swoje zdrowie!
       </p>
       <div className='mb-8 space-y-4'>
         {orders.map((order) => (

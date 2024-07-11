@@ -12,7 +12,7 @@ type TUpdateProductDialog = {
 };
 
 const UpdateProductDialog = forwardRef<HTMLDialogElement, TUpdateProductDialog>(
-  function DeleteProductDialog({ handleClose, product }, ref) {
+  function UpdateProductDialog({ handleClose, product }, ref) {
     const [state, action] = useFormState(updateProductAction, {
       errors: {},
       message: '',
